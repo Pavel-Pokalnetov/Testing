@@ -21,4 +21,9 @@ public class UserRepository {
         }
         return false;
     }
+
+    public void unLoginUsersExceptAdmins() {
+        //удаляем залогиненных пользователей кроме админов
+        data.removeIf(user -> !user.isAdmin);
+    }
 }
