@@ -10,8 +10,8 @@ public class CalcHW {
         }
     }
 
-    public static boolean  numberInInterval(int n){
-        return (n>25 && n<100);
+    public static boolean numberInInterval(int n) {
+        return (n > 25 && n < 100);
     }
 }
 

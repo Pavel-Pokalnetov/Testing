@@ -11,13 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
     static UserRepository repository;
+
     @BeforeAll
-    static void setUp(){
+    static void setUp() {
         repository = new UserRepository();
     }
 
     @Test
-    void checkAuthenticateUserPositive(){
+    void checkAuthenticateUserPositive() {
         String name = "name";
         String password = "password";
 
@@ -27,7 +28,7 @@ public class UserTest {
     }
 
     @Test
-    void checkAuthenticateUserNegative(){
+    void checkAuthenticateUserNegative() {
         String name = "name";
         String password = "password";
         String wrongPassword = "wrongPassword";
@@ -38,7 +39,7 @@ public class UserTest {
     }
 
     @Test
-    void checkRepositoryAddAuthenticatedUserPositive(){
+    void checkRepositoryAddAuthenticatedUserPositive() {
         String name = "name";
         String password = "password";
 
@@ -48,17 +49,17 @@ public class UserTest {
         int currentCount = repository.data.size();
         repository.addUser(user);
 
-       assertThat(repository.data.size())
-               .isEqualTo(currentCount + 1);
+        assertThat(repository.data.size())
+                .isEqualTo(currentCount + 1);
 
-       User userInRepository =
-               repository.data.get(repository.data.size() - 1);
+        User userInRepository =
+                repository.data.get(repository.data.size() - 1);
 
-       assertEquals(user, userInRepository);
+        assertEquals(user, userInRepository);
     }
 
     @Test
-    void checkRepositoryAddNotAuthenticatedUserNegative(){
+    void checkRepositoryAddNotAuthenticatedUserNegative() {
         String name = "name";
         String password = "password";
 
@@ -123,7 +124,7 @@ public class UserTest {
 
         assertThat(usr.data.get(1).name)
                 .isEqualTo("Oliver");
-        
+
         assertThat(usr.data.get(2).name)
                 .isEqualTo("suadmin");
 
