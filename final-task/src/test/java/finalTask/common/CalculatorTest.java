@@ -21,9 +21,12 @@ class CalculatorTest {
     List<Byte> byteList = Arrays.asList((byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5);
     List<Integer> emptyList = new ArrayList<>();
 
+    /**
+     * тест на проверку входных аргументов со значением null
+     * путем отлова RuntimeExceptions с передаваемыми строками сообщения
+     */
     @Test
     void testCalculatorConstructorNullArguments() {
-
         //проверка передачи null списков
         // первый список == null
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
@@ -45,6 +48,9 @@ class CalculatorTest {
 
     }
 
+    /**
+     * тест на проверку входных аргументов - пустых списков
+     */
     @Test
     void testCalculatorConstrictorEmptyListInArguments() {
 
@@ -63,6 +69,11 @@ class CalculatorTest {
         Assertions.assertEquals("an empty list was received, calculations are impossible", thrown.getMessage());
     }
 
+
+    /**
+     * проверка корректности работы конструктора
+     * со всеми возможными типами чисел в списках-аргументах
+     */
     @Test
     void testCalculatorConstructorCorrectArguments() {
         // проверка передачи списков всех возможных типов данных
@@ -89,18 +100,16 @@ class CalculatorTest {
         }
     }
 
+    /**
+     * проверка корректности возвращаемых строк
+     */
     @Test
     void testCompareListOutput() {
-        String BIGGER = "Первый список имеет большее среднее значение";
-        String SMALLER = "Второй список имеет большее среднее значение";
-        String EQUAL = "Средние значения равны";
-
+        final String BIGGER = "Первый список имеет большее среднее значение";
+        final String SMALLER = "Второй список имеет большее среднее значение";
+        final String EQUAL = "Средние значения равны";
         assertEquals(EQUAL, new Calculator(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 4)).compareList());
-
-
         assertEquals(SMALLER, new Calculator(Arrays.asList(1, 2, 3, 0), Arrays.asList(1, 2, 3, 4)).compareList());
-
-
         assertEquals(BIGGER, new Calculator(Arrays.asList(4, 5, 6, 7, 8, 9), Arrays.asList(1, 2, 3, 4)).compareList());
 
 

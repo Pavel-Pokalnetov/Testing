@@ -44,7 +44,7 @@ public class Calculator {
         return 0;
     }
 
-    private static double avr(@NotNull List<? extends Number> lst) throws RuntimeException {
+    private static double avr(@NotNull List<? extends Number> lst){
         double summ = 0.0;
         for (Number n : lst) {
             summ = summ + n.doubleValue();
