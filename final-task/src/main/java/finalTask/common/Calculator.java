@@ -1,4 +1,4 @@
-package finalTask.common;
+package finaltask.common;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -8,23 +8,29 @@ public class Calculator {
     private static final String BIGGER = "Первый список имеет большее среднее значение";
     private static final String SMALLER = "Второй список имеет большее среднее значение";
     private static final String EQUAL = "Средние значения равны";
-    private List<? extends Number> listA;
-    private List<? extends Number> listB;
+    private final List<? extends Number> listA;
+    private final List<? extends Number> listB;
 
     public Calculator(List<? extends Number> listA, List<? extends Number> listB) throws RuntimeException  {
         if (listA == null || listB == null) throw new RuntimeException("one of the lists is null");
         if (listA.isEmpty()||listB.isEmpty()) throw new RuntimeException("an empty list was received, calculations are impossible");
         this.listA = listA;
         this.listB = listB;
-//        if (listB.get(2).equals(3f)) throw new RuntimeException("");
     }
 
-    public void compareList() {
+    public String compareList() {
         switch (compare0(listA, listB)) {
-            case 1 -> System.out.println(BIGGER);
-            case -1 -> System.out.println(SMALLER);
-            case 0 -> System.out.println(EQUAL);
+            case 1 -> {
+                return(BIGGER);
+            }
+            case -1 -> {
+                return(SMALLER);
+            }
+            default -> {
+                return(EQUAL);
+            }
         }
+
     }
 
     private int compare0(List<? extends Number> listA, List<? extends Number> listB){

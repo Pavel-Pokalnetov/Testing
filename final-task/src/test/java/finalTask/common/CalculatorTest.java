@@ -1,10 +1,8 @@
-package finalTask.common;
+package finaltask.common;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +22,7 @@ class CalculatorTest {
     List<Integer> emptyList = new ArrayList<>();
 
     @Test
-    void testCalculatorConstroctor() {
+    void testCalculatorConstructorNullArguments() {
 
         //проверка передачи null списков
         // первый список == null
@@ -45,9 +43,13 @@ class CalculatorTest {
         });
         Assertions.assertEquals("one of the lists is null", thrown.getMessage());
 
+    }
+
+    @Test
+    void testCalculatorConstrictorEmptyListInArguments() {
 
         // передача пустого списка
-        thrown = Assertions.assertThrows(RuntimeException.class, () -> {
+        RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             new Calculator(emptyList, integerList);
         });
         Assertions.assertEquals("an empty list was received, calculations are impossible", thrown.getMessage());
@@ -59,8 +61,10 @@ class CalculatorTest {
             new Calculator(emptyList, emptyList);
         });
         Assertions.assertEquals("an empty list was received, calculations are impossible", thrown.getMessage());
+    }
 
-
+    @Test
+    void testCalculatorConstructorCorrectArguments() {
         // проверка передачи списков всех возможных типов данных
         List<List<? extends Number>> testList = new ArrayList<>();
         testList.add(integerList);
@@ -87,24 +91,17 @@ class CalculatorTest {
 
     @Test
     void testCompareListOutput() {
-        String BIGGER = "Первый список имеет большее среднее значение\r\n";
-        String SMALLER = "Второй список имеет большее среднее значение\r\n";
-        String EQUAL = "Средние значения равны\r\n";
+        String BIGGER = "Первый список имеет большее среднее значение";
+        String SMALLER = "Второй список имеет большее среднее значение";
+        String EQUAL = "Средние значения равны";
 
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
+        assertEquals(EQUAL, new Calculator(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 4)).compareList());
 
-        Calculator calc = new Calculator(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 4));
-        calc.compareList();
 
-        calc = new Calculator(Arrays.asList(1, 2, 3, 0), Arrays.asList(1, 2, 3, 4));
-        calc.compareList();
+        assertEquals(SMALLER, new Calculator(Arrays.asList(1, 2, 3, 0), Arrays.asList(1, 2, 3, 4)).compareList());
 
-        calc = new Calculator(Arrays.asList(4,5,6,7,8,9), Arrays.asList(1, 2, 3, 4));
-        calc.compareList();
 
-        assertEquals(EQUAL+SMALLER+BIGGER, output.toString());
-
+        assertEquals(BIGGER, new Calculator(Arrays.asList(4, 5, 6, 7, 8, 9), Arrays.asList(1, 2, 3, 4)).compareList());
 
 
     }

@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">finalTask.common</a>
+    <a href="../index.html">finaltask.common</a>
 </div>
 
-<h1>Coverage Summary for Class: Calculator (finalTask.common)</h1>
+<h1>Coverage Summary for Class: Calculator (finaltask.common)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -75,7 +75,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package finalTask.common;
+<code class="sourceCode" id="sourceCode">&nbsp;package finaltask.common;
 &nbsp;
 &nbsp;import org.jetbrains.annotations.NotNull;
 &nbsp;
@@ -85,23 +85,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    private static final String BIGGER = &quot;Первый список имеет большее среднее значение&quot;;
 &nbsp;    private static final String SMALLER = &quot;Второй список имеет большее среднее значение&quot;;
 &nbsp;    private static final String EQUAL = &quot;Средние значения равны&quot;;
-&nbsp;    private List&lt;? extends Number&gt; listA;
-&nbsp;    private List&lt;? extends Number&gt; listB;
+&nbsp;    private final List&lt;? extends Number&gt; listA;
+&nbsp;    private final List&lt;? extends Number&gt; listB;
 &nbsp;
 <b class="fc">&nbsp;    public Calculator(List&lt;? extends Number&gt; listA, List&lt;? extends Number&gt; listB) throws RuntimeException  {</b>
 <b class="fc">&nbsp;        if (listA == null || listB == null) throw new RuntimeException(&quot;one of the lists is null&quot;);</b>
 <b class="fc">&nbsp;        if (listA.isEmpty()||listB.isEmpty()) throw new RuntimeException(&quot;an empty list was received, calculations are impossible&quot;);</b>
 <b class="fc">&nbsp;        this.listA = listA;</b>
 <b class="fc">&nbsp;        this.listB = listB;</b>
-&nbsp;//        if (listB.get(2).equals(3f)) throw new RuntimeException(&quot;&quot;);
 &nbsp;    }
 &nbsp;
-&nbsp;    public void compareList() {
+&nbsp;    public String compareList() {
 <b class="fc">&nbsp;        switch (compare0(listA, listB)) {</b>
-<b class="fc">&nbsp;            case 1 -&gt; System.out.println(BIGGER);</b>
-<b class="fc">&nbsp;            case -1 -&gt; System.out.println(SMALLER);</b>
-<b class="fc">&nbsp;            case 0 -&gt; System.out.println(EQUAL);</b>
+&nbsp;            case 1 -&gt; {
+<b class="fc">&nbsp;                return(BIGGER);</b>
+&nbsp;            }
+&nbsp;            case -1 -&gt; {
+<b class="fc">&nbsp;                return(SMALLER);</b>
+&nbsp;            }
+&nbsp;            default -&gt; {
+<b class="fc">&nbsp;                return(EQUAL);</b>
+&nbsp;            }
 &nbsp;        }
+&nbsp;
 &nbsp;    }
 &nbsp;
 &nbsp;    private int compare0(List&lt;? extends Number&gt; listA, List&lt;? extends Number&gt; listB){
@@ -146,7 +152,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-27 16:16</div>
+    <div style="float:right;">generated on 2023-10-27 16:55</div>
 </div>
 </body>
 </html>

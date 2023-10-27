@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1251"> 
-  <title>Coverage Report > App</title>
+  <title>Coverage Report > Calculator</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">finalTask</a>
+    <a href="../index.html">finaltask.common</a>
 </div>
 
-<h1>Coverage Summary for Class: App (finalTask)</h1>
+<h1>Coverage Summary for Class: Calculator (finaltask.common)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -41,29 +41,29 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">App</td>
+  <td class="name">Calculator</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/3)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/21)
+    (21/21)
   </span>
 </td>
 </tr>
@@ -75,42 +75,58 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package finalTask;
+<code class="sourceCode" id="sourceCode">&nbsp;package finaltask.common;
 &nbsp;
-&nbsp;import finalTask.common.Calculator;
+&nbsp;import org.jetbrains.annotations.NotNull;
 &nbsp;
-&nbsp;import java.util.Arrays;
 &nbsp;import java.util.List;
 &nbsp;
+&nbsp;public class Calculator {
+&nbsp;    private static final String BIGGER = &quot;Первый список имеет большее среднее значение&quot;;
+&nbsp;    private static final String SMALLER = &quot;Второй список имеет большее среднее значение&quot;;
+&nbsp;    private static final String EQUAL = &quot;Средние значения равны&quot;;
+&nbsp;    private final List&lt;? extends Number&gt; listA;
+&nbsp;    private final List&lt;? extends Number&gt; listB;
 &nbsp;
-<b class="nc">&nbsp;public class App {</b>
-&nbsp;    public static void main(String[] args) {
-<b class="nc">&nbsp;        List&lt;Integer&gt; integerList = Arrays.asList(1, 2, 3, 4, 5, 6);</b>
-<b class="nc">&nbsp;        List&lt;Integer&gt; integerList1 = Arrays.asList(0, 3, 3, 4, 5, 6);</b>
-<b class="nc">&nbsp;        List&lt;Float&gt; floatList = Arrays.asList(12.3f, -4.1f, 0.0f, 7.0f, 2.3f, -8.7f);</b>
-<b class="nc">&nbsp;        System.out.println(&quot;---------------------------------------&quot;);</b>
-<b class="nc">&nbsp;        printList(integerList);</b>
-<b class="nc">&nbsp;        printList(floatList);</b>
-<b class="nc">&nbsp;        new Calculator(integerList,floatList).compareList();</b>
-<b class="nc">&nbsp;        System.out.println(&quot;---------------------------------------&quot;);</b>
-<b class="nc">&nbsp;        printList(floatList);</b>
-<b class="nc">&nbsp;        printList(integerList);</b>
-<b class="nc">&nbsp;        new Calculator(floatList,integerList).compareList();</b>
-<b class="nc">&nbsp;        System.out.println(&quot;---------------------------------------&quot;);</b>
-<b class="nc">&nbsp;        printList(integerList);</b>
-<b class="nc">&nbsp;        printList(integerList1);</b>
-<b class="nc">&nbsp;        new Calculator(integerList,integerList1).compareList();</b>
-<b class="nc">&nbsp;        System.out.println(&quot;---------------------------------------&quot;);</b>
+<b class="fc">&nbsp;    public Calculator(List&lt;? extends Number&gt; listA, List&lt;? extends Number&gt; listB) throws RuntimeException  {</b>
+<b class="fc">&nbsp;        if (listA == null || listB == null) throw new RuntimeException(&quot;one of the lists is null&quot;);</b>
+<b class="fc">&nbsp;        if (listA.isEmpty()||listB.isEmpty()) throw new RuntimeException(&quot;an empty list was received, calculations are impossible&quot;);</b>
+<b class="fc">&nbsp;        this.listA = listA;</b>
+<b class="fc">&nbsp;        this.listB = listB;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String compareList() {
+<b class="fc">&nbsp;        switch (compare0(listA, listB)) {</b>
+&nbsp;            case 1 -&gt; {
+<b class="fc">&nbsp;                return(BIGGER);</b>
+&nbsp;            }
+&nbsp;            case -1 -&gt; {
+<b class="fc">&nbsp;                return(SMALLER);</b>
+&nbsp;            }
+&nbsp;            default -&gt; {
+<b class="fc">&nbsp;                return(EQUAL);</b>
+&nbsp;            }
+&nbsp;        }
 &nbsp;
 &nbsp;    }
 &nbsp;
-&nbsp;
-&nbsp;    private static void printList(List&lt;? extends Number&gt; list){
-<b class="nc">&nbsp;        System.out.print(&quot;{&quot;);</b>
-<b class="nc">&nbsp;        for (int i = 0; i &lt; list.size(); i++) {</b>
-<b class="nc">&nbsp;            if(i&lt;list.size()-1) System.out.print(list.get(i)+&quot;, &quot;);</b>
+&nbsp;    private int compare0(List&lt;? extends Number&gt; listA, List&lt;? extends Number&gt; listB){
+<b class="fc">&nbsp;        double avrA = avr(listA);</b>
+<b class="fc">&nbsp;        double avrB = avr(listB);</b>
+<b class="fc">&nbsp;        if (avrA &gt; avrB) {</b>
+<b class="fc">&nbsp;            return 1;</b>
+<b class="fc">&nbsp;        } else if (avrA &lt; avrB) {</b>
+<b class="fc">&nbsp;            return -1;</b>
 &nbsp;        }
-<b class="nc">&nbsp;        System.out.println(&quot;}&quot;);</b>
+<b class="fc">&nbsp;        return 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static double avr(@NotNull List&lt;? extends Number&gt; lst) throws RuntimeException {
+<b class="fc">&nbsp;        double summ = 0.0;</b>
+<b class="fc">&nbsp;        for (Number n : lst) {</b>
+<b class="fc">&nbsp;            summ = summ + n.doubleValue();</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return summ / lst.size();</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -136,7 +152,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-27 16:16</div>
+    <div style="float:right;">generated on 2023-10-27 17:27</div>
 </div>
 </body>
 </html>
