@@ -12,7 +12,7 @@ public class Calculator {
     private final List<? extends Number> listB;
 
     public Calculator(List<? extends Number> listA, List<? extends Number> listB) throws RuntimeException  {
-        if (listA == null || listB == null) throw new RuntimeException("one of the lists is null");
+        if (listA == null || listB == null) throw new RuntimeException("one or both of the lists is null");
         if (listA.isEmpty()||listB.isEmpty()) throw new RuntimeException("an empty list was received, calculations are impossible");
         this.listA = listA;
         this.listB = listB;

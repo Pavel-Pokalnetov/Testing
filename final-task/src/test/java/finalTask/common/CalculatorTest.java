@@ -1,12 +1,26 @@
+/*
+* Для тестирования выбраны все public методы класса Calculator:
+*
+* необходимо протестировать корректность валидации входных данных:
+*  - null во входных аргументах конструктора: должно возникать исключение RuntimeException
+*  - пустые списки в качестве входных данных конструктора: должно возникать исключение RuntimeException
+*
+* необходимо протестировать все корректные варианты передаваемых входных аргументов конструктора
+*   не должно возникать исключительных ситуаций
+*
+* необходимо протестировать корректность возвращаемых данных метода commpareList
+*   проверка всех трех вариантов возвращаемых значений
+*   (при условии, что входные аргументы прошли валидацию в конструкторе)
+*
+*
+ * */
 package finaltask.common;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -22,29 +36,29 @@ class CalculatorTest {
     List<Integer> emptyList = new ArrayList<>();
 
     /**
-     * тест на проверку входных аргументов со значением null
+     * тест на проверку недопустимых входных аргументов со значением null
      * путем отлова RuntimeExceptions с передаваемыми строками сообщения
+     *
      */
     @Test
     void testCalculatorConstructorNullArguments() {
-        //проверка передачи null списков
         // первый список == null
         RuntimeException thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             new Calculator(null, integerList);
         });
-        Assertions.assertEquals("one of the lists is null", thrown.getMessage());
+        Assertions.assertEquals("one or both of the lists is null", thrown.getMessage());
 
         // второй список == null
         thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             new Calculator(integerList, null);
         });
-        Assertions.assertEquals("one of the lists is null", thrown.getMessage());
+        Assertions.assertEquals("one or both of the lists is null", thrown.getMessage());
 
         // оба списка == null
         thrown = Assertions.assertThrows(RuntimeException.class, () -> {
             new Calculator(null, null);
         });
-        Assertions.assertEquals("one of the lists is null", thrown.getMessage());
+        Assertions.assertEquals("one or both of the lists is null", thrown.getMessage());
 
     }
 
@@ -100,6 +114,7 @@ class CalculatorTest {
         }
     }
 
+
     /**
      * проверка корректности возвращаемых строк
      */
@@ -108,6 +123,7 @@ class CalculatorTest {
         final String BIGGER = "Первый список имеет большее среднее значение";
         final String SMALLER = "Второй список имеет большее среднее значение";
         final String EQUAL = "Средние значения равны";
+
         assertEquals(EQUAL, new Calculator(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 4)).compareList());
         assertEquals(SMALLER, new Calculator(Arrays.asList(1, 2, 3, 0), Arrays.asList(1, 2, 3, 4)).compareList());
         assertEquals(BIGGER, new Calculator(Arrays.asList(4, 5, 6, 7, 8, 9), Arrays.asList(1, 2, 3, 4)).compareList());
